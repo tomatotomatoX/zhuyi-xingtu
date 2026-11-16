@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#1B1233">
+<title>主义星图 · 48个抉择看清你的底层主义</title>
+<script src="data.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+:root{
+  --bg:#17102E;--bg2:#241640;--card:rgba(255,255,255,.055);--card2:rgba(255,255,255,.09);
+  --line:rgba(255,255,255,.14);--ink:#EDE9F7;--ink2:#BDB4D6;--dim:#8E84AC;--faint:#6A6187;
+  --accent:#A78BFA;--mono:ui-monospace,'SF Mono',Consolas,'Cascadia Mono',monospace;
+}
+body{
+  background:linear-gradient(168deg,var(--bg) 0%,var(--bg2) 55%,#1A1136 100%);
+  color:var(--ink);overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","HarmonyOS Sans","Microsoft YaHei",sans-serif;
+  font-size:15.5px;line-height:1.85;letter-spacing:.4px;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+/* 星空层 */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%,rgba(255,255,255,.9) 50%,transparent 51%),
+    radial-gradient(1px 1px at 28% 8%,rgba(255,255,255,.6) 50%,transparent 51%),
+    radial-gradient(2px 2px at 44% 30%,rgba(231,222,255,.8) 50%,transparent 51%),
+    radial-gradient(1px 1px at 61% 12%,rgba(255,255,255,.55) 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 76% 26%,rgba(255,255,255,.85) 50%,transparent 51%),
+    radial-gradient(1px 1px at 88% 7%,rgba(255,255,255,.5) 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 8% 52%,rgba(255,255,255,.7) 50%,transparent 51%),
+    radial-gradient(1px 1px at 36% 64%,rgba(255,255,255,.5) 50%,transparent 51%),
+    radial-gradient(2px 2px at 55% 80%,rgba(232,222,255,.75) 50%,transparent 51%),
+    radial-gradient(1px 1px at 70% 58%,rgba(255,255,255,.6) 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 92% 44%,rgba(255,255,255,.8) 50%,transparent 51%),
+    radial-gradient(1px 1px at 20% 86%,rgba(255,255,255,.45) 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 82% 90%,rgba(255,255,255,.65) 50%,transparent 51%);
+  animation:twinkle 7s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.55}to{opacity:1}}
+.wrap{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1}
+.page{display:none;flex:1;flex-direction:column;animation:up .5s cubic-bezier(.2,.8,.2,1)}
+.page.on{display:flex}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ================= 首页 ================= */
+#intro{justify-content:center;text-align:center;padding:52px 28px 48px}
+.brand{font-family:var(--mono);font-size:11px;letter-spacing:6px;color:var(--dim);margin-bottom:26px}
+.bigstar{position:relative;width:150px;height:150px;margin:0 auto 30px}
+.bigstar .ring{position:absolute;inset:0;border:1px solid var(--line);border-radius:50%;animation:spin 40s linear infinite}
+.bigstar .ring2{inset:22px;border-color:rgba(255,255,255,.08);animation-duration:28s;animation-direction:reverse}
+.bigstar .core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:52px;filter:drop-shadow(0 0 18px rgba(167,139,250,.75));animation:pulse 3.4s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.12)}}
+#intro h1{font-size:34px;font-weight:900;letter-spacing:11px;text-indent:11px;margin-bottom:14px;
+  background:linear-gradient(120deg,#F4EFFF 20%,#C9B8FF 55%,#A78BFA 90%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#intro .sub{font-size:13px;color:var(--ink2);letter-spacing:2.5px;margin-bottom:34px}
+.meta{display:flex;justify-content:center;gap:10px;margin-bottom:40px}
+.meta span{font-family:var(--mono);font-size:11.5px;color:var(--dim);border:1px solid var(--line);
+  padding:5px 13px;border-radius:99px;letter-spacing:1px}
+.btn-main{display:block;width:100%;padding:16px 0 15px;border:none;cursor:pointer;
+  background:linear-gradient(120deg,#8B5CF6,#A78BFA 60%,#C4B0FF);color:#170F2B;
+  font-size:16.5px;font-weight:800;letter-spacing:8px;text-indent:8px;border-radius:14px;
+  box-shadow:0 8px 30px rgba(139,92,246,.4);transition:transform .15s}
+.btn-main:active{transform:scale(.97)}
+.note{margin-top:18px;font-size:12px;color:var(--faint);letter-spacing:1px}
+
+/* ================= 答题页 ================= */
+#quiz{padding:26px 22px 40px}
+.qtop{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);color:var(--dim);font-size:12px;letter-spacing:1.5px}
+.qtop b{color:var(--accent);font-weight:700}
+.pbar{height:3px;background:var(--line);border-radius:99px;margin:12px 0 30px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8B5CF6,#C4B0FF);border-radius:99px;transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.qtag{font-size:11.5px;color:var(--dim);letter-spacing:3px;margin-bottom:10px}
+.qtitle{font-size:19px;font-weight:700;line-height:1.75;margin-bottom:26px;min-height:66px}
+.opt{display:flex;align-items:flex-start;gap:13px;padding:15px 16px;margin-bottom:12px;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);border-radius:13px;transition:all .18s}
+.opt:active{transform:scale(.98)}
+.opt .k{flex:none;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;font-weight:700;color:var(--dim);background:rgba(255,255,255,.07);margin-top:2px;transition:all .18s}
+.opt .t{font-size:14.5px;line-height:1.7;color:var(--ink2);transition:color .18s}
+.opt.on{border-color:var(--accent);background:rgba(167,139,250,.14)}
+.opt.on .k{background:var(--accent);color:#1B1233}
+.opt.on .t{color:var(--ink)}
+.back{margin:6px auto 0;padding:10px 26px;font-size:13px;letter-spacing:3px;color:var(--dim);
+  background:none;border:1px solid var(--line);border-radius:99px;cursor:pointer}
+.back.off{opacity:.25;pointer-events:none}
+
+/* ================= 加载页 ================= */
+#loading{justify-content:center;align-items:center;padding:40px;text-align:center}
+.orbit{position:relative;width:130px;height:130px;margin-bottom:38px}
+.orbit .o{position:absolute;inset:0;border:1px solid var(--line);border-radius:50%;animation:spin 6s linear infinite}
+.orbit .o2{inset:18px;animation-duration:4s;animation-direction:reverse}
+.orbit .dot{position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;
+  background:#C4B0FF;box-shadow:0 0 12px #A78BFA}
+.orbit .core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;
+  filter:drop-shadow(0 0 14px rgba(167,139,250,.8))}
+#loadtxt{font-size:14px;color:var(--ink2);letter-spacing:2px;min-height:24px}
+
+/* ================= 结果页 ================= */
+#result{padding:34px 22px 56px}
+.hero{text-align:center;padding:10px 6px 26px}
+.mtag{font-size:11.5px;letter-spacing:5px;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:12px}
+.mtag i{display:block;width:34px;height:1px;background:var(--line)}
+.hero h2{font-size:32px;font-weight:900;letter-spacing:7px;text-indent:7px;line-height:1.4;margin-bottom:6px}
+.hero h2 .x{font-weight:300;color:var(--dim);margin:0 4px}
+.hxcmb{font-size:13.5px;color:var(--ink2);letter-spacing:2.5px;margin-bottom:20px}
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chips span{font-size:11.5px;color:var(--ink2);border:1px solid var(--line);border-radius:99px;padding:4px 12px;letter-spacing:1px}
+.sl{font-size:14px;color:var(--ink2);margin-bottom:26px;letter-spacing:.5px;line-height:1.9}
+.ringwrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ringlab{font-size:11px;letter-spacing:4px;color:var(--dim)}
+.sec{margin-top:30px;padding:24px 20px;background:var(--card);border:1px solid var(--line);border-radius:18px}
+.sec h3{font-size:15px;font-weight:800;letter-spacing:3px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sec h3 i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:0;
+  border:1px solid var(--accent);border-radius:6px;padding:1px 7px;opacity:.85}
+.radar{width:100%;max-width:380px;display:block;margin:0 auto}
+.radar .rl{font-size:12.5px;fill:var(--dim);letter-spacing:1px}
+.radar .rl.main{fill:var(--ink);font-weight:700}
+.note{margin-top:16px;font-size:11.5px;color:var(--faint);letter-spacing:.5px;line-height:1.8;text-align:center}
+.dimrow{display:flex;align-items:center;gap:12px;padding:9px 0}
+.dimrow .nm{width:66px;font-size:13px;color:var(--ink2);letter-spacing:1px;flex:none}
+.dimrow .tr{flex:1;height:7px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+.dimrow .tr i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#7C5CE0,#C4B0FF);
+  transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.dimrow .vl{width:40px;text-align:right;font-family:var(--mono);font-size:12px;color:var(--dim)}
+.dimrow.top .nm{color:var(--ink);font-weight:700}
+.dimrow.top .vl{color:var(--accent);font-weight:700}
+.read p{font-size:14px;line-height:1.9;color:var(--ink2);margin-bottom:14px}
+.read p:last-child{margin-bottom:0}
+.read b{color:var(--ink)}
+.read b.ac{color:var(--accent)}
+.credo li{list-style:none;position:relative;padding:9px 0 9px 26px;font-size:14px;color:var(--ink2);line-height:1.8}
+.credo li::before{content:'✦';position:absolute;left:2px;color:var(--accent);font-size:12px;top:11px}
+.bodytext{font-size:14.5px;line-height:2;color:var(--ink2)}
+.bodytext+.bodytext{margin-top:14px}
+.ulist li{list-style:none;position:relative;padding:7px 0 7px 24px;font-size:14px;color:var(--ink2);line-height:1.75}
+.ulist li::before{content:'·';position:absolute;left:6px;color:var(--accent);font-weight:900;font-size:18px;top:3px}
+.shadowbox{border:1px dashed rgba(155,143,208,.5);border-radius:14px;padding:18px 18px 16px;margin-top:14px;
+  background:rgba(155,143,208,.07)}
+.shadowbox .st{font-size:12px;letter-spacing:3px;color:var(--dim);margin-bottom:10px}
+.shadowbox .sb{font-size:13.5px;line-height:1.9;color:var(--ink2)}
+.speedbox{display:flex;align-items:center;gap:16px;margin-top:14px;padding:16px 18px;
+  border:1px solid var(--line);border-radius:14px;background:var(--card2)}
+.speedbox .ic{font-size:30px}
+.speedbox .t b{display:block;font-size:14.5px;color:var(--ink);letter-spacing:1px;margin-bottom:2px}
+.speedbox .t span{font-size:12.5px;color:var(--dim);line-height:1.6}
+.tension{margin-top:14px}
+.tension .lab{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);letter-spacing:1.5px;margin-bottom:8px}
+.tension .lab b{color:var(--accent);font-family:var(--mono)}
+.tension .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.tension .bar i{display:block;height:100%;border-radius:99px;
+  background:linear-gradient(90deg,#7C5CE0,var(--accent));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.misbox{margin-top:12px}
+.misrow{padding:12px 14px;background:var(--card2);border-radius:12px;margin-bottom:10px}
+.misrow .say{font-size:13px;color:var(--ink);margin-bottom:5px}
+.misrow .real{font-size:12.5px;color:var(--dim);line-height:1.7}
+.misrow .real::before{content:'→ ';color:var(--accent)}
+.mftext{text-align:center;font-size:15px;line-height:2;color:var(--ink);padding:22px 12px 8px;letter-spacing:1px}
+.footbtns{display:flex;gap:12px;margin-top:26px}
+.btn2{flex:1;padding:13px 0;border-radius:13px;border:none;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:3px;transition:transform .15s}
+.btn2:active{transform:scale(.97)}
+.btn2.ghost{background:none;border:1px solid var(--line);color:var(--ink2)}
+.btn2.solid{background:linear-gradient(120deg,#8B5CF6,#C4B0FF);color:#170F2B}
+.toast{position:fixed;left:50%;bottom:14%;transform:translateX(-50%) translateY(10px);opacity:0;
+  background:rgba(30,22,56,.92);border:1px solid var(--line);color:var(--ink);
+  font-size:13px;letter-spacing:1px;padding:11px 22px;border-radius:99px;pointer-events:none;z-index:99;
+  transition:all .3s;backdrop-filter:blur(8px)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* ================= 卡密弹窗 ================= */
+.auth{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
+  background:rgba(10,7,22,.72);backdrop-filter:blur(6px);padding:30px}
+.auth.on{display:flex}
+.authbox{width:100%;max-width:330px;background:#221743;border:1px solid var(--line);border-radius:20px;
+  padding:30px 26px 26px;text-align:center;animation:up .4s cubic-bezier(.2,.8,.2,1)}
+.authbox .ic{font-size:34px;margin-bottom:12px;filter:drop-shadow(0 0 10px rgba(167,139,250,.6))}
+.authbox h3{font-size:17px;letter-spacing:4px;font-weight:800;margin-bottom:8px}
+.authbox p{font-size:12.5px;color:var(--dim);margin-bottom:22px;letter-spacing:1px}
+.authbox input{width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--line);
+  background:rgba(255,255,255,.06);color:var(--ink);font-size:15px;letter-spacing:3px;text-align:center;
+  outline:none;font-family:var(--mono)}
+.authbox input:focus{border-color:var(--accent)}
+.authbox .vbtn{width:100%;margin-top:14px;padding:13px 0;border:none;border-radius:12px;cursor:pointer;
+  background:linear-gradient(120deg,#8B5CF6,#C4B0FF);color:#170F2B;font-size:15px;font-weight:800;letter-spacing:5px;text-indent:5px}
+.authbox .aclose{margin-top:16px;font-size:12px;color:var(--faint);letter-spacing:2px;cursor:pointer}
+.conf{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;
+  background:rgba(10,7,22,.72);backdrop-filter:blur(6px);padding:30px}
+.conf.on{display:flex}
+.confbox{width:100%;max-width:310px;background:#221743;border:1px solid var(--line);border-radius:18px;
+  padding:26px 24px 20px;text-align:center;animation:up .4s cubic-bezier(.2,.8,.2,1)}
+.confbox .ct{font-size:14.5px;line-height:1.9;color:var(--ink2);margin-bottom:18px}
+.confbox .cbtn{display:block;width:100%;padding:11px 0;border:none;border-radius:12px;cursor:pointer;
+  background:rgba(255,255,255,.09);color:var(--ink);font-size:14px;letter-spacing:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page on" id="intro">
+    <div class="brand">ISM · ASTROLABE</div>
+    <div class="bigstar"><div class="ring"></div><div class="ring ring2"></div><div class="core">✦</div></div>
+    <h1>主义星图</h1>
+    <div class="sub">48 个抉择 · 看清你的底层主义</div>
+    <div class="meta"><span>48 题</span><span>9 种主义</span><span>约 6 分钟</span></div>
+    <button class="btn-main" onclick="gate()">开 始 测 评</button>
+    <div class="note">凭第一直觉作答 · 结果生成专属主义星图</div>
+  </div>
+
+  <div class="page" id="quiz">
+    <div class="qtop"><span id="cNum">01<b>/48</b></span><span id="cPct">0%</span></div>
+    <div class="pbar"><i id="cBar"></i></div>
+    <div class="qtag" id="cLab">Q1 · 凭直觉选</div>
+    <div class="qtitle" id="cTitle"></div>
+    <div id="cOpts"></div>
+    <button class="back off" id="btnBack" onclick="prev()">上一题</button>
+  </div>
+
+  <div class="page" id="loading">
+    <div class="orbit"><div class="o"><div class="dot"></div></div><div class="o o2"><div class="dot" style="background:#FFD75E;box-shadow:0 0 10px #FFD75E"></div></div><div class="core">✦</div></div>
+    <div id="loadtxt">正在点亮你的星图…</div>
+  </div>
+
+  <div class="page" id="result"></div>
+
+</div>
+
+<div class="auth" id="authModal">
+  <div class="authbox">
+    <div class="ic">✦</div>
+    <h3>需要授权码</h3>
+    <p>使用本测评需要授权码激活</p>
+    <input type="text" id="codeInput" placeholder="请输入授权码" maxlength="16" autocomplete="off">
+    <button class="vbtn" id="vbtn" onclick="tryAuth()">验证授权码</button>
+    <div class="aclose" onclick="closeAuth()">暂 不 测 了</div>
+  </div>
+</div>
+
+<div class="conf" id="confModal">
+  <div class="confbox">
+    <div class="ct" id="confText"></div>
+    <button class="cbtn" onclick="closeConf()">知道了</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 卡密门（纯前端） ============ */
+const VALID_CODES=['JIHUIZHUYI'];        // ← 卡密改这里，可加多个
+const AUTH_KEY='ism_auth_expiry';        // 验证缓存 3 天
+function authOk(){const e=localStorage.getItem(AUTH_KEY);return e&&Date.now()<parseInt(e)}
+function saveAuth(){localStorage.setItem(AUTH_KEY,String(Date.now()+3*24*3600*1000))}
+function gate(){
+  if(authOk()){startQuiz();return}
+  const c=new URLSearchParams(location.search).get('code');
+  if(c){if(VALID_CODES.includes(c.toUpperCase())){saveAuth();startQuiz();return}
+    openAuth(c.toUpperCase());toast('链接里的授权码无效');return}
+  openAuth('');
+}
+function openAuth(v){document.getElementById('codeInput').value=v;document.getElementById('authModal').classList.add('on')}
+function closeAuth(){document.getElementById('authModal').classList.remove('on')}
+function tryAuth(){
+  const v=document.getElementById('codeInput').value.trim().toUpperCase();
+  if(!v){showConf('请输入授权码！');return}
+  if(VALID_CODES.includes(v)){saveAuth();closeAuth();startQuiz()}
+  else{showConf('授权码「'+v+'」无效，请检查后重新输入')}
+}
+document.getElementById('codeInput').addEventListener('keypress',e=>{if(e.key==='Enter')tryAuth()});
+function showConf(t){document.getElementById('confText').textContent=t;document.getElementById('confModal').classList.add('on')}
+function closeConf(){document.getElementById('confModal').classList.remove('on')}
+
+/* ============ 答题 ============ */
+const N=QS.length,DN=DIMS.length;
+const TOTAL=new Array(DN).fill(0);
+for(let i=0;i<N;i++)for(let k=1;k<=4;k++)TOTAL[(i*4+k-1)%DN]++;
+let idx=0,ans=new Array(N).fill(-1),times=new Array(N).fill(0),tShow=0,res=null;
+const $=s=>document.querySelector(s);
+const go=id=>{document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));$('#'+id).classList.add('on');window.scrollTo(0,0)};
+
+function startQuiz(){idx=0;ans=new Array(N).fill(-1);times=new Array(N).fill(0);render();go('quiz')}
+
+function shuffle(a,seed){let s=seed*9301+49297;const r=()=>{s=(s*9301+49297)%233280;return s/233280};
+  const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+
+function render(){
+  const q=QS[idx];
+  $('#cNum').innerHTML=String(idx+1).padStart(2,'0')+'<b>/'+N+'</b>';
+  $('#cPct').textContent=Math.round(idx/N*100)+'%';
+  $('#cBar').style.width=((idx+1)/N*100)+'%';
+  $('#cLab').textContent='Q'+(idx+1)+' · 凭第一直觉选';
+  $('#cTitle').textContent=q[0];
+  const opts=[1,2,3,4].map(k=>({d:(idx*4+k-1)%DN,t:q[k]}));
+  const view=shuffle(opts,idx+7);
+  $('#cOpts').innerHTML=view.map((o,i)=>
+    '<div class="opt'+(ans[idx]===o.d?' on':'')+'" data-d="'+o.d+'" onclick="pick('+o.d+')">'+
+    '<div class="k">'+'ABCD'[i]+'</div><div class="t">'+o.t+'</div></div>').join('');
+  $('#btnBack').className='back'+(idx===0?' off':'');
+  tShow=performance.now();
+}
+function pick(d){
+  if(!times[idx])times[idx]=performance.now()-tShow;   /* 记录首次作答用时 */
+  ans[idx]=d;
+  document.querySelectorAll('#cOpts .opt').forEach(el=>el.classList.toggle('on',Number(el.dataset.d)===d));
+  setTimeout(()=>{if(idx<N-1){idx++;render()}else{finish()}},300);
+}
+function prev(){if(idx>0){idx--;render()}}
+
+/* ============ 计算 ============ */
+function finish(){
+  const sc=new Array(DN).fill(0);
+  ans.forEach(d=>{if(d>=0)sc[d]++});
+  const exp=TOTAL.map(t=>t/4), sd=TOTAL.map(t=>Math.sqrt(t*.25*.75));
+  const z=sc.map((v,i)=>(v-exp[i])/sd[i]);
+  const order=z.map((v,i)=>({i,v})).sort((a,b)=>b.v-a.v);
+  const idxv=z.map(v=>Math.max(18,Math.min(99,Math.round(50+v*13))));
+  const tension=z[order[0].i]-z[order[1].i];
+  const validTimes=times.filter(t=>t>300);
+  const avg=validTimes.length?validTimes.reduce((a,b)=>a+b,0)/validTimes.length:4000;
+  res={sc,z,order,idxv,tension,main:order[0].i,sub:order[1].i,third:order[2].i,shadow:order[DN-1].i,
+       fast:avg<3500,avg:Math.round(avg/100)/10};
+  go('loading');
+  const steps=['正在读取你的 48 个抉择…','在 9 种主义间定位你的坐标…','计算主义纯粹度…','扫描你的阴影盲区…','校准直觉决策速度…','正在点亮你的星图…'];
+  let s=0;const t=$('#loadtxt');
+  const timer=setInterval(()=>{s++;if(s<steps.length){t.textContent=steps[s]}else{clearInterval(timer);showResult()}},460);
+}
+
+/* ============ 星轨雷达 ============ */
+function radarSVG(){
+  const cx=200,cy=172,R=92,LR=120;
+  const ang=i=>(-90+i*40)*Math.PI/180;
+  const ring=rr=>{let p='';for(let i=0;i<9;i++){const a=ang(i);p+=(cx+R*rr*Math.cos(a)).toFixed(1)+','+(cy+R*rr*Math.sin(a)).toFixed(1)+' '}return p.trim()};
+  const star=(x,y,r,fill,glow)=>'<path d="M'+x+','+(y-r)+' L'+(x+r*.22)+','+(y-r*.22)+' L'+(x+r)+','+y+' L'+(x+r*.22)+','+(y+r*.22)+' L'+x+','+(y+r)+' L'+(x-r*.22)+','+(y+r*.22)+' L'+(x-r)+','+y+' L'+(x-r*.22)+','+(y-r*.22)+' Z" fill="'+fill+'"'+(glow?' filter="drop-shadow(0 0 5px '+fill+')"':'')+'/>';
+  let s='<svg viewBox="0 0 400 348" class="radar">';
+  [0.33,0.66,1].forEach(rr=>{s+='<polygon points="'+ring(rr)+'" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>'});
+  for(let i=0;i<9;i++){const a=ang(i);
+    s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*Math.cos(a)).toFixed(1)+'" y2="'+(cy+R*Math.sin(a)).toFixed(1)+'" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>'}
+  let poly='';
+  for(let i=0;i<9;i++){const a=ang(i);const v=res.idxv[i]/100*.9+.08;
+    poly+=(cx+R*v*Math.cos(a)).toFixed(1)+','+(cy+R*v*Math.sin(a)).toFixed(1)+' '}
+  s+='<polygon points="'+poly.trim()+'" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-width="1.8" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px var(--accent))"/>';
+  for(let i=0;i<9;i++){const a=ang(i);const v=res.idxv[i]/100*.9+.08;
+    const x=cx+R*v*Math.cos(a),y=cy+R*v*Math.sin(a);
+    s+=star(x.toFixed(1),y.toFixed(1),i===res.main?6:3.5,i===res.main?'var(--accent)':'#EDE9F7',i===res.main)}
+  for(let i=0;i<9;i++){const a=ang(i);const c=Math.cos(a);
+    const anchor=c>0.3?'start':(c<-0.3?'end':'middle');
+    s+='<text x="'+(cx+LR*c).toFixed(1)+'" y="'+(cy+LR*Math.sin(a)).toFixed(1)+'" text-anchor="'+anchor+'" dominant-baseline="middle" class="rl'+(i===res.main?' main':'')+'">'+DIMS[i].n+'</text>'}
+  return s+'</svg>';
+}
+
+/* ============ 结果页 ============ */
+function showResult(){
+  const m=DIMS[res.main],s2=DIMS[res.sub],th=DIMS[res.third],sh=DIMS[res.shadow];
+  const mixed=res.tension<0.35;
+  const purity=Math.round(Math.min(1,res.tension/1.4)*100);
+  document.documentElement.style.setProperty('--accent',m.c);
+  const titleHtml=mixed
+    ?'<div class="mtag"><i></i>你 是 混 合 型<i></i></div><h2>'+m.n+'<span class="x">×</span>'+s2.n+'</h2>'+
+     '<div class="hxcmb">'+m.nn+' × '+s2.aj+s2.nn+'</div>'
+    :'<div class="mtag"><i></i>你 的 主 导 主 义<i></i></div><h2>'+m.n+'</h2>'+
+     '<div class="hxcmb">'+m.aj+m.nn+'</div>';
+  const rows=res.order.map((o,i)=>{const d=DIMS[o.i];
+    return '<div class="dimrow'+(i===0?' top':'')+'"><div class="nm">'+d.n+'</div>'+
+      '<div class="tr"><i data-w="'+res.idxv[o.i]+'"></i></div><div class="vl">'+res.idxv[o.i]+'%</div></div>'}).join('');
+  const sayReal=m.mis.map(t=>{const p=t.split('，其实');
+    return '<div class="misrow"><div class="say">「'+p[0].replace(/^别人以为你/,'')+'」</div><div class="real">'+(p[1]||'')+'</div></div>'}).join('');
+  const li=a=>a.map(x=>'<li>'+x+'</li>').join('');
+
+  $('#result').innerHTML=
+  '<div class="hero"><div>'+titleHtml+
+    '<div class="chips">'+m.kw.slice(0,3).map(k=>'<span>'+k+'</span>').join('')+'</div>'+
+    '<div class="sl">「'+m.sl+'」</div>'+
+    '<div class="ringwrap">'+
+      '<svg width="92" height="92" viewBox="0 0 92 92">'+
+        '<circle cx="46" cy="46" r="39" fill="none" stroke="var(--line)" stroke-width="3"/>'+
+        '<circle id="ringArc" cx="46" cy="46" r="39" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="245" stroke-dashoffset="245" transform="rotate(-90 46 46)"/>'+
+        '<text id="ringNum" x="46" y="52" text-anchor="middle" font-size="21" font-weight="700" fill="var(--ink)" font-family="ui-monospace,Consolas,monospace">0</text>'+
+      '</svg><div class="ringlab">契 合 指 数</div></div></div></div>'+
+
+  '<div class="sec"><h3><i>01</i>主义星图</h3>'+radarSVG()+
+    '<div style="height:22px"></div>'+rows+
+    '<div class="note">按你的 48 次选择换算 · 主导星越大越亮，代表你越常以此方式理解世界</div></div>'+
+
+  '<div class="sec"><h3><i>02</i>纯粹度与三重底色</h3>'+
+    '<div class="tension"><div class="lab"><span>'+m.n+' 的纯粹度</span><b>'+purity+'%</b></div>'+
+    '<div class="bar"><i data-w="'+purity+'"></i></div>'+
+    '<div class="note" style="margin-top:8px">'+(mixed
+      ?'第 1 与第 2 名几乎并驾齐驱——你是罕见的双主导混合型'
+      :(purity>70?'你的主导主义异常纯粹，几乎没有对手':'你的主导主义清晰，但副线始终在施加引力'))+'</div></div>'+
+    '<div class="read" style="margin-top:16px">'+
+    '<p><b class="ac">主色 · '+m.n+'</b><br>你人生的默认设置。压力之下、来不及思考时，跳出来的那一个总是它。</p>'+
+    '<p><b>第二重 · '+s2.n+'</b><br>'+s2.sub+'</p>'+
+    '<p><b>第三重余韵 · '+th.n+'</b><br>它不常出现，但在某些特定时刻会被激活，是你身上不太被人看见的那一面。</p></div></div>'+
+
+  '<div class="sec"><h3><i>03</i>阴影盲区</h3>'+
+    '<div class="shadowbox"><div class="st">✧ 离你最远的主义 · '+sh.n+'</div>'+
+    '<div class="sb">它落在你星图的最暗处，你对它天然免疫——但免疫也意味着错过。它的钥匙你未必不需要：'+sh.sl+'。偶尔借来用一用，你的星图会更圆。</div></div>'+
+    '<div class="note" style="text-align:left;margin-top:12px">警惕点：'+sh.kw.slice(0,3).join(' / ')+'这类能力，是你最不习惯调用、也最值得补课的部分。</div></div>'+
+
+  '<div class="sec"><h3><i>04</i>决策风格</h3>'+
+    '<div class="speedbox"><div class="ic">'+(res.fast?'⚡':'🧭')+'</div><div class="t">'+
+    '<b>'+(res.fast?'直觉决策者':'深思决策者')+' · 均速 '+res.avg+' 秒/题</b>'+
+    '<span>'+(res.fast
+      ?'你作答果断，很少反刍——你的答案常常来自比思考更快的地方，这是 '+m.n+' 的本能节奏。'
+      :'你作答审慎，每一题都在心里称过重量——深思熟虑让结果更贴近真实的你，也让 '+m.n+' 更有分量。')+'</span></div></div></div>'+
+
+  '<div class="sec"><h3><i>05</i>你是这样的人</h3>'+
+    '<div class="bodytext">'+m.who+'</div>'+
+    '<div class="bodytext"><b style="color:var(--accent)">它是怎么来的：</b>'+m.why+'</div>'+
+    '<ul class="ulist" style="margin-top:16px">'+li(m.daily)+'</ul></div>'+
+
+  '<div class="sec"><h3><i>06</i>别人怎么误读你</h3><div class="misbox">'+sayReal+'</div></div>'+
+
+  '<div class="sec"><h3><i>07</i>你的信条</h3><ul class="credo">'+li(m.cr)+'</ul></div>'+
+
+  '<div class="sec"><h3><i>08</i>阴影与软肋</h3>'+
+    '<div class="bodytext">'+m.sh+'</div>'+
+    '<div class="bodytext" style="margin-top:12px"><b style="color:var(--accent)">在关系里：</b>'+m.rel+'</div></div>'+
+
+  '<div class="sec"><h3><i>09</i>给你的三句话</h3><ul class="credo">'+li(m.tips)+'</ul></div>'+
+
+  '<div class="mftext">✦<br>'+m.mf+'</div>'+
+
+  '<div class="footbtns">'+
+    '<button class="btn2 ghost" onclick="shareText()">复制我的星图</button>'+
+    '<button class="btn2 solid" onclick="startQuiz()">再测一次</button></div>';
+
+  go('result');
+  /* 动画：契合环 + 进度条 */
+  setTimeout(()=>{
+    const arc=$('#ringArc'),num=$('#ringNum'),v=res.idxv[res.main];
+    const dur=1100,t0=performance.now();
+    const step=t=>{const p=Math.min(1,(t-t0)/dur);
+      arc.style.strokeDashoffset=245*(1-p*v/100);
+      num.textContent=Math.round(v*p);
+      if(p<1)requestAnimationFrame(step)};
+    requestAnimationFrame(step);
+    document.querySelectorAll('#result .tr i,#result .tension .bar i').forEach(el=>{el.style.width=el.dataset.w+'%'});
+  },120);
+}
+
+function shareText(){
+  const m=DIMS[res.main],s2=DIMS[res.sub],sh=DIMS[res.shadow];
+  const txt='✦ 我在「主义星图」测了我的底层主义\n'+
+    '主导：'+m.n+'（契合 '+res.idxv[res.main]+'%）· '+m.nn+'\n'+
+    '第二重：'+s2.n+' ｜ 阴影盲区：'+sh.n+'\n'+
+    '决策风格：'+(res.fast?'直觉型 ⚡':'深思型 🧭')+'\n'+
+    '「'+m.mf+'」\n'+
+    '48 个抉择，测出你的底层主义 →';
+  const done=()=>toast('已复制，去粘贴吧 ✦');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,()=>fallbackCopy(txt,done))}
+  else fallbackCopy(txt,done);
+}
+function fallbackCopy(t,done){
+  const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);
+  ta.select();try{document.execCommand('copy');done()}catch(e){toast('复制失败，长按结果页截图分享')}
+  document.body.removeChild(ta);
+}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1900)}
+</script>
+</body>
+</html>
